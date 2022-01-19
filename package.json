@@ -1,0 +1,14 @@
+{
+  "name": "nodejs-base",
+  "version": "1.0.0",
+  "description": "nodejs base application",
+  "main": "index.ts",
+  "author": "Mohan K",
+  "license": "ISC",
+  "engines": {
+    "node": "16.13.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

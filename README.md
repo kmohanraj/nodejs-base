@@ -43,7 +43,7 @@ yarn add -D @types/bcrypt \
 
 ##### 5. Logger
 
-[src/util/logger.ts](logger.ts)
+[logger.ts](src/util/logger.ts)
 
 ##### 6. Env Vars
 

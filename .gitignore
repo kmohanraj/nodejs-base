@@ -1,0 +1,13 @@
+build
+coverage
+node_modules
+public/
+logs/
+
+.env
+.nyc_output
+.vscode
+package-lock.json
+yarn.lock
+yarn-error.log
+.DS_Store

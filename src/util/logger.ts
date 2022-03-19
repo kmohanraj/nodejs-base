@@ -1,4 +1,5 @@
 import { createLogger, format, transports } from 'winston';
+import CONSTANTS from '../constant/constants';
 
 const logFormat = format.printf(
   ({ level, message, timestamp, ...metaData }) => {
@@ -12,12 +13,15 @@ const logFormat = format.printf(
 
 let silent;
 switch (process.env.NODE_ENV) {
-  case 'dev':
+  case CONSTANTS.ENVIRONMENTS.DEV:
     silent = false;
-  case 'prod':
+    break;
+  case CONSTANTS.ENVIRONMENTS.PROD:
     silent = false;
-  case 'test':
+    break;
+  case CONSTANTS.ENVIRONMENTS.TEST:
     silent = true;
+    break;
   default:
     break;
 }
@@ -35,7 +39,7 @@ const logger = createLogger({
       )
     }),
     new transports.File({
-      filename: `${process.cwd()}/src/logs.app.log`,
+      filename: `${process.cwd()}/src/logs/app.log`,
       level: 'debug',
       maxsize: 10 * 1000000,
       maxFiles: 10

@@ -5,7 +5,26 @@
 ##### 2. Install Dependencies
 
 ```
-yarn add chai cors cross-origin cookie-parser compression dotenv dotenv-cli express eslint joi mocka nodemon nyc prettier typescript ts-node winston
+yarn add
+    chai \
+    cors \
+    cross-origin \
+    cookie-parser \
+    compression \
+    dotenv \
+    dotenv-cli \
+    express \
+    eslint \
+    joi \
+    mocka \
+    nodemon \
+    nyc \
+    prettier \
+    typescript \
+    ts-node \
+    winston \
+    @prisma/client \
+    prisma
 ```
 
 ##### 3. Install Dev Dependencies
@@ -57,9 +76,21 @@ yarn add -D @types/bcrypt \
 
 ```
 
+# Environment Variables for Dev.
+
+DB_CONNECTION=mysql://root:root@localhost:3306/nodejs-base?schema=public
+
 PORT=5000
 
 # Adding Frontend Uri for CORS
+
 CORS_ORIGIN=http://localhost:3000
+
+```
+
+##### 11. Prisma
+
+```
+npx prisma init
 
 ```

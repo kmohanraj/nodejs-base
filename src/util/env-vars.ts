@@ -2,6 +2,7 @@ import path from 'path';
 import dotenv from 'dotenv';
 import Joi from 'joi';
 import logger from './logger';
+import CONSTANTS from '../constant/constants';
 
 declare const process: {
   cwd: () => string;
@@ -17,8 +18,8 @@ dotenv.config({
 
 const envSchema = Joi.object()
   .keys({
-    NODE_ENV: Joi.string().valid('prod', 'test', 'dev', 'staging').required(),
-    PORT: Joi.string().valid('5000').required(),
+    NODE_ENV: Joi.string().valid('test', 'dev', 'staging', 'prod').required(),
+    PORT: Joi.string().valid(CONSTANTS.CONFIG.PORT).required(),
     CORS_ORIGIN: Joi.string().required()
   })
   .unknown();

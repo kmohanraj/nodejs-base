@@ -6,13 +6,17 @@
   "author": "Mohan Kandasamy",
   "license": "ISC",
   "engines": {
-    "node": "16.14.2"
+    "node": ">=16.14.2"
   },
   "scripts": {
     "dev": "NODE_ENV=$npm_package_config_dev_env nodemon index.ts",
     "start": "nodemon index.ts",
-    "lint": "eslint 'src/**/*.ts' 'src/*.ts' '*.ts' --quiet --fix",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint .",
+    "lint:fix": "eslint 'src/**/*.ts' 'src/*.ts' '*.ts' --quiet --fix",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "coverage": "jest -i --coverage",
+    "prettier": "prettier --check **/*.ts",
+    "prepare": "husky install"
   },
   "config": {
     "dev_env": "dev",
@@ -28,18 +32,17 @@
     "cross-origin": "^1.0.6",
     "dotenv": "^16.0.0",
     "dotenv-cli": "^5.0.0",
-    "eslint": "^8.11.0",
+    "eslint-config-prettier": "^9.0.0",
     "express": "^4.17.3",
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
-    "mocka": "^0.0.1",
     "nodemon": "^2.0.15",
     "nyc": "^15.1.0",
-    "prettier": "^2.6.0",
     "prisma": "^3.11.0",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.2",
-    "winston": "^3.6.0"
+    "winston": "^3.6.0",
+    "xss-clean": "^0.1.4"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
@@ -61,7 +64,14 @@
     "@typescript-eslint/parser": "^5.15.0",
     "chai-as-promised": "^7.1.1",
     "chai-http": "^4.3.0",
+    "eslint": "^8.50.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-security": "^1.7.1",
     "husky": "^7.0.4",
+    "lint-staged": "^14.0.1",
+    "mocha": "^10.2.0",
+    "moment": "^2.29.4",
+    "prettier": "^3.0.3",
     "sinon": "^13.0.1",
     "sinon-chai": "^3.7.0"
   }

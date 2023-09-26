@@ -25,6 +25,7 @@ switch (process.env.NODE_ENV) {
   default:
     break;
 }
+
 const logger = createLogger({
   level: 'debug',
   transports: [
@@ -47,4 +48,50 @@ const logger = createLogger({
   ]
 });
 
+const loginRecords = createLogger({
+  level: 'debug',
+  transports: [
+    new transports.Console({
+      level: 'info',
+      silent,
+      format: format.combine(
+        format.colorize(),
+        format.splat(),
+        format.timestamp(),
+        logFormat
+      )
+    }),
+    new transports.File({
+      filename: `${process.cwd()}/src/logs/login-attempts.log`,
+      level: 'debug',
+      maxsize: 10 * 1000000,
+      maxFiles: 10
+    })
+  ]
+});
+
+const CSRFEvents = createLogger({
+  level: 'debug',
+  transports: [
+    new transports.Console({
+      level: 'info',
+      silent,
+      format: format.combine(
+        format.colorize(),
+        format.splat(),
+        format.timestamp(),
+        logFormat
+      )
+    }),
+    new transports.File({
+      filename: `${process.cwd()}/src/logs/login-attempts.log`,
+      level: 'debug',
+      maxsize: 10 * 1000000,
+      maxFiles: 10
+    })
+  ]
+});
+
 export default logger;
+
+export { loginRecords, CSRFEvents };

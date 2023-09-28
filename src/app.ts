@@ -9,7 +9,8 @@ import cookieParser from 'cookie-parser';
 import logger from './util/logger';
 import CSRFHandler from './middleware/CSRF/CSRFErrorHandler';
 import corsOrigin from './util/corsOrigin';
-import CONSTANTS from './constant/constants';
+import CONSTANTS from './config/constants';
+import api from './controllers/routes';
 
 const app = express();
 
@@ -26,9 +27,12 @@ app.use(compression());
 app.use(express.json({ limit: CONSTANTS.CONFIG.JSON_FILE_LIMIT }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(crypto.randomBytes(64).toString('hex')));
+// Routes
+app.use('/api/v1', api);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(
   (
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     err: any,
     req: express.Request,
     res: express.Response,
@@ -50,4 +54,4 @@ app.get('/healthCheck', async (req, res) => {
 });
 
 export default app;
-export { prisma as PrismaClient };
+export { prisma as PrismaDBClient };

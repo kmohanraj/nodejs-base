@@ -1,5 +1,5 @@
 import { createLogger, format, transports } from 'winston';
-import CONSTANTS from '../constant/constants';
+import CONSTANTS from '../config/constants';
 
 const logFormat = format.printf(
   ({ level, message, timestamp, ...metaData }) => {

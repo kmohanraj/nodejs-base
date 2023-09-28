@@ -9,3 +9,36 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_CONNECTION")
 }
+
+model roles {
+  id    Int     @id @default(autoincrement())
+  name  String  @db.VarChar(120)
+  users users[]
+}
+
+model users {
+  id            Int            @id @default(autoincrement())
+  name          String         @db.VarChar(120)
+  email         String         @db.VarChar(120)
+  password      String         @db.VarChar(200)
+  phone         String         @db.VarChar(10)
+  access_token  String?        @db.VarChar(500)
+  isFirstLogin  Boolean        @default(true) @db.TinyInt()
+  created_at    DateTime       @default(now())
+  updated_at    DateTime       @updatedAt
+  created_by    String?        @db.VarChar(120)
+  updated_by    String?        @db.VarChar(120)
+  deleted_at    DateTime?
+  deleted_by    String?        @db.VarChar(120)
+  is_active     Boolean        @default(true) @db.TinyInt()
+  role_id       Int
+  roles         roles          @relation(fields: [role_id], references: [id])
+}
+
+model tokenKey {
+  id         Int      @id @default(autoincrement())
+  token      String   @unique @db.VarChar(250)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  active     Boolean  @default(true)
+}

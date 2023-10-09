@@ -17,7 +17,7 @@ const app = express();
 // prisma config------
 
 const prisma = new PrismaClient({
-  log: process.env.NODE_ENV === 'dev' ? ['query', 'info'] : undefined
+  log: process.env.NODE_ENV === 'dev' ? ['query', 'info', 'error'] : undefined
 });
 // Adding helmet to ensure the basic security level.
 app.use(helmet());

@@ -35,9 +35,11 @@ export const register = async (
         message: MESSAGES.ERROR.USER.USER_ALREADY_EXISTS
       };
     }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const payload: any = {
+    const payload: Prisma.usersUncheckedCreateInput = {
       email: data.email.toLocaleLowerCase(),
+      name: data.name,
+      phone: data.phone,
+      role_id: data.role_id,
       password: passwordHash,
       created_by: currentUser.email,
       updated_by: currentUser.email
@@ -187,10 +189,22 @@ export const remove = async (id: number, userId: number): Promise<IStatus> => {
 };
 
 export const update = async (
-  data: Prisma.usersUncheckedUpdateInput,
+  data: Prisma.usersUncheckedCreateInput,
   id: number,
   userId: number
 ): Promise<IStatus> => {
+  const isUserAlreadyExists = await UserRepository.findOne({
+    email: data?.email
+  });
+  if (
+    isUserAlreadyExists?.email === data.email &&
+    isUserAlreadyExists?.id !== id
+  ) {
+    return {
+      status: STATUS_CODE.STATUS_409,
+      message: MESSAGES.ERROR.USER.USER_ALREADY_EXISTS
+    };
+  }
   const currentUser = await UserRepository.findByValue({ id: userId });
   const { password, ...filterData } = data;
   const updatePass = password

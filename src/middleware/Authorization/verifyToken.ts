@@ -24,21 +24,19 @@ export default async (
   ) {
     return res.sendStatus(CONSTANTS.STATUS_CODE.STATUS_401);
   }
-
+  const refreshTokenData = await RefreshAccessToken(userData as users);
   return jwt.verify(
     req.headers['authorization'] as string,
     userData.access_token as string,
     async (err, data) => {
       if (err) {
-        const refreshTokenData = await RefreshAccessToken(userData as users);
         if (refreshTokenData === CONSTANTS.UTILS.REFRESH_TOKEN_EXPIRED) {
           return res.sendStatus(CONSTANTS.STATUS_CODE.STATUS_401);
-        } else {
-          res.setHeader('authorization', refreshTokenData as string);
-          return next();
         }
+        return res.sendStatus(CONSTANTS.STATUS_CODE.STATUS_401);
       }
       if (data) {
+        res.setHeader('authorization', refreshTokenData as string);
         return next();
       }
     }

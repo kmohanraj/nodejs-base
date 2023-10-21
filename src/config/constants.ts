@@ -30,7 +30,7 @@ export default {
   },
   AUTHORIZATION_RESPONSES: {
     USER_NOT_FOUND: 'User Not Found',
-    TOKEN_NOT_FOUND: 'Token Not Found'
+    TOKEN_NOT_FOUND: 'Authorization failed. No access token.'
   },
   MESSAGES: {
     SUCCESS: {

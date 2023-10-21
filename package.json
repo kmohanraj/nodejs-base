@@ -9,13 +9,16 @@
     "node": ">=16.14.2"
   },
   "scripts": {
-    "dev": "NODE_ENV=$npm_package_config_dev_env nodemon index.ts",
-    "start": "nodemon index.ts",
+    "dev": "npm run migrate && NODE_ENV=$npm_package_config_dev_env nodemon index.ts",
+    "prod": "npm run build && npm start",
+    "start": "npm run migrate && nodemon index.ts",
+    "build": "tsc --build",
     "migrate": "npx prisma migrate dev",
     "seed": "ts-node prisma/seed.ts",
     "lint": "eslint .",
     "lint:fix": "eslint 'src/**/*.ts' 'src/*.ts' '*.ts' --quiet --fix",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "NODE_ENV=$npm_package_config_test_env mocha tests/index.ts --config=.mocharc.json --exit",
+    "test:coverage": "NODE_ENV=$npm_package_config_test_env nyc npm run test",
     "coverage": "jest -i --coverage",
     "prettier": "prettier --check **/*.ts",
     "prepare": "husky install"
